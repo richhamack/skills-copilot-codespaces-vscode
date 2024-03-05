@@ -1,14 +1,14 @@
-// create web server
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var fs = require("fs");
+// Create web server
+// The web server should respond to any request by sending a response with a status code of 200 and a body of "OK"
+// If the request path is /comments, the server should respond with the body "You don't have permission to access /comments"
+const http = require('http');
 
-// create server from copilot and move forward
-var server = app.listen(8081 , function(){
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log("Server is running at http://%s:%s", host, port);
-}
-);  
+const server = http.createServer((req, res) => {
+  if (req.url === '/comments') {
+    res.end('You don\'t have permission to access /comments');
+  } else {
+    res.end('OK');
+  }
+});
+
+server.listen(3000);
